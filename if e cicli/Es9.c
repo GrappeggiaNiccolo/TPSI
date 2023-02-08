@@ -1,8 +1,9 @@
 #include <stdio.h>
-
+#include <limits.h> // Libreria per utilizzate INT_MAX (21474836471)
+void main()
 {
     int a, b, c;
-    int min = 4294967295, max = 0;
+    int min = /*21474836471*/INT_MAX, max = INT_MIN;
 
     do
     {
@@ -17,9 +18,13 @@
         {
 
             if (a < min)
+            {
                 min = a;
+            }
             if (c > max)
+            {
                 max = c;
+            }
         }
         else
         {
