@@ -2,17 +2,21 @@
 #include <string.h>
 int main()
 {
-    char str1[20], carattere;
+    char str1[20],str2[20], carattere[1];
     int contChar = 0;
     printf("Inserire una stringa: ");
-    scanf("%c", str1);
-    printf("Inserire il carattere: \n");
-    //scanf("%c", &carattere);
-    carattere = getchar();
+    scanf("%s", str1);
 
-    for (int i = 0; i < strlen(str1); i++)
+    strcpy(str2,str1);  //???
+
+    printf("Inserire il carattere: \n");
+    scanf("%s", carattere);
+    //carattere = getchar();
+    printf("%s", str2);
+    printf("%s\n", carattere);
+    for (int i = 0; i < strlen(str2); i++)
     {
-        if (str1[i] == carattere)
+        if (str2[i] == carattere[0])
         {
             contChar++;
         }
@@ -20,11 +24,11 @@ int main()
 
     if (contChar == 0)
     {
-        printf("Il carattere %c non è presente\n", carattere);
+        printf("Il carattere %c non è presente %d\n", carattere[0], contChar);
     }
     else
     {
-        printf("Il carattere %c è presente %d volte\n", carattere, contChar);
+        printf("Il carattere %c è presente %d volte\n", carattere[0], contChar);
     }
     return 0;
 }
