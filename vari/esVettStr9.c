@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 // 2)      Quale delle 2 stringhe contiene più vocali;
 // 3)      Quale delle 2 stringhe contiene più consonanti.
 {
-    int k = 0, contVoc, contDisp;
+    int k = 0, contPari, contDisp;
     char str[50], pari[50], disp[50];
 
     printf("Inserire una stringa: ");
@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
         {
             if (i % 2 == 0)
             {
-                pari[contVoc] = str[i];
-                contVoc++;
+                pari[contPari] = str[i];
+                contPari++;
             }
             else
             {
@@ -47,13 +47,29 @@ int main(int argc, char *argv[])
             }
         }
     }
-
+    // =========================================================================
     for (int i = 0; i < strlen(pari); i++)
     {
-        printf("%s", pari);
+        printf("%s\n", pari);
+    }
+    for (int i = 0; i < strlen(disp); i++)
+    {
+        printf("%s\n", disp);
     }
 
     // 3) Quale delle 2 è più lunga e più corta;
 
+    if (contDisp > contPari)
+    {
+        printf("La frase di indici dispari è la più lunga");
+    }
+    else if (contPari > contDisp)
+    {
+        printf("La frase di indici pari è la più lunga");
+    }
+    else
+    {
+        printf("Le frasi sono lunghe uguali");
+    }
     return 0;
 }
