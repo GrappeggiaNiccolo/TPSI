@@ -18,7 +18,13 @@ int main(int argc, char *argv[])
     printf("Inserire una stringa: ");
     scanf("%s", str);
 
+    for (int i = 0; i < strlen(str); i++)
+    {
+        str[i] = tolower(str[i]);
+    }
+
     // 1) Che contenga solo lettere;
+    //1.1)
     do
     {
         if (!isalpha(str[k]))
@@ -29,9 +35,18 @@ int main(int argc, char *argv[])
         k++;
     } while (str[k] != '\0');
     k = 0;
+    //1.2)
+    for (int i = 0; i < strlen(str); i++)
+    {
+        if (str[i] < 'a' || str[i] > 'z')
+        {
+            printf("La stringa non deve essere numerica/alfanumerica \n");
+            return 0;
+        }
+    }
 
     // 2) Crei 2 ulteriori stringhe che contengano: la 1° le lettere di posizione pari; la 2° le lettere di posizione dispari;
-    for (int i = 0; i < strlen(str) && str[i] != '\0'; i++)
+    for (int i = 0; i < strlen(str); i++)
     {
         if (str[i] != '\0')
         {
@@ -47,23 +62,22 @@ int main(int argc, char *argv[])
             }
         }
     }
-    // =========================================================================
-    for (int i = 0; i < strlen(pari); i++)
-    {
-        printf("%s\n", pari);
-    }
-    for (int i = 0; i < strlen(disp); i++)
-    {
-        printf("%s\n", disp);
-    }
+    
+    // stampo le stringhe
+    printf("%s", pari);
+    
+    printf("\n");
+    
+    printf("%s\n", disp);
+    
 
     // 3) Quale delle 2 è più lunga e più corta;
 
-    if (contDisp > contPari)
+    if (strlen(disp) > strlen(pari))
     {
         printf("La frase di indici dispari è la più lunga");
     }
-    else if (contPari > contDisp)
+    else if (strlen(pari) > strlen(disp))
     {
         printf("La frase di indici pari è la più lunga");
     }
@@ -71,5 +85,6 @@ int main(int argc, char *argv[])
     {
         printf("Le frasi sono lunghe uguali");
     }
+
     return 0;
 }
