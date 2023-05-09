@@ -63,6 +63,7 @@ void Inserimento_Elemento(int NumInCoda, int n, int numeri[]) // 2
         if (numeri[i] == 0)
         {
             numeri[i] = NumInCoda;
+            break;
         }
         else
         {
@@ -195,14 +196,17 @@ void Azione(int n, int opzione, int numeri[])
 int main()
 {
     int numeri[SHRT_MAX], n = Array(numeri);
-    int opzione = Opzione();
-    if (opzione == 0)
+    do
     {
-        printf("Programma finito");
-        return 0;
-    }
-    else
-    {
-        Azione(n, opzione, numeri);
-    }
+        int opzione = Opzione();
+        if (opzione == 0)
+        {
+            printf("Programma finito");
+            return 0;
+        }
+        else
+        {
+            Azione(n, opzione, numeri);
+        }
+    } while (1);
 }
