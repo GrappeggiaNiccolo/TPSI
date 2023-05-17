@@ -51,13 +51,13 @@ void Stampa(int ripetuto[])
         }
     }
 
-    printf("\nIl numero %d si ripete più volte\n", max);
+    printf("\nIl numero si ripete %d volte\n", max);
 
 }
 
 int main(int argc, char *argv[])
 {
-    int n = Array(), numeri[n], ripetuto[10];
+    int n = Array(), numeri[n], ripetuto[10] = {0};
 
     Inserimento(n, numeri); // funzione per inserire i numeri nell'array
 
