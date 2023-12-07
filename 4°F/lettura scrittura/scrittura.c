@@ -8,5 +8,14 @@ int main(int argc, char *argv[])
 
     if (puntaFile == NULL)
     {
+        printf("FIle non accessibile");
+        fclose(puntaFile);
+        return -1;
     }
+
+    printf("File %s aperto", puntaFile);
+
+
+
+    return 0;
 }
