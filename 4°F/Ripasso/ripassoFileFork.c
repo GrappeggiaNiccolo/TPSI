@@ -17,9 +17,9 @@ Nel programma il processo padre genera due figli e la suddivisione dei compiti d
 int main(int argc, char *argv[])
 {
     int length = 10000;
-    char buffer[10] = {0};
     int numeri[length];
     int randomNumber;
+    int h = 0;
     FILE *file;
 
     // Seed the random number generator with the current time
@@ -27,45 +27,57 @@ int main(int argc, char *argv[])
 
     file = fopen("numeri.txt", "w");
 
-    //ERR check
+    // ERR check
     if (file == NULL)
     {
         fprintf(stderr, "Error opening file for writing\n");
         return -1;
     }
-    //RNG
+    // RNG
     for (int i = 0; i < 5; i++)
     {
+        h++;
         randomNumber = (rand() % 500) + 1;
-
-        fprintf(file, "%d : %d\n", i, randomNumber);
+        fprintf(file, "%d : %d\n", h, randomNumber);
     }
     fclose(file);
 
     fopen("numeri.txt", "r");
-    //ERR check
+    // ERR check
     if (file == NULL)
     {
         fprintf(stderr, "Error opening file for writing\n");
         return -1;
     }
-    //Lettura
+    // Lettura
     while (fscanf(file, "%d", &randomNumber) == 1)
     {
-        printf("%s\n", randomNumber);
+        printf("%c\n", (char)randomNumber);
     }
     int x;
-    
-    //sprintf();
-    char ch;
-    while ((ch = fgetc(file)) != EOF) 
+
+    // sprintf();
+    // Scrittura a video-
+    char buffer[8], ch, ch2;
+    int j = 0, k = 0, cont = 0;
+    while (cont < 5) // (ch = fgetc(file)) != EOF
     {
-        if (i == 1)
+        // Initialize to '\0' using memset
+        memset(buffer, '\0', sizeof(buffer));
+        // Porta il file all'indice voluto
+        fseek(file, k, SEEK_SET);
+        while ((ch2 = fgetc(file)) != '\n')
         {
-            putchar(ch);
-            printf("\n\n");
+            buffer[j] = ch2;
+            j++;
         }
-        i++;
+        k += j; // per partire a leggere il file da una nuova riga gli aggiungo i caratteri letti, poi incremento di 1 per compensare lo '\n' che non viene letto
+        k++;
+        j = 0;
+        cont++;
+        printf("%s\n", buffer);
     }
+
+    fclose(file);
     return 0;
 }
