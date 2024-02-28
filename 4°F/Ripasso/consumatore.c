@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     fd = open("pipe", O_RDONLY);
 
     // lettura da fifo e scrittura su file
+    ftruncate(fileno(destinazione), 0);
     while ((n = read(fd, buffer, sizeof(buffer))) > 0)
     {
         fwrite(buffer, 1, sizeof(buffer), destinazione);
