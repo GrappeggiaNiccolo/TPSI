@@ -4,6 +4,7 @@
 #include <sys/wait.h>
 
 #define NUMERO 2
+
 int main(int argc, char *argv[])
 {
     // padre passa al figlio dati inseriti da utente per stamparli

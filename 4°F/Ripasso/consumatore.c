@@ -5,6 +5,7 @@
 #include <fcntl.h>
 
 #define BUFF_SIZE 2048
+
 int main(int argc, char *argv[])
 {
     // legge da fifo e scrive su un file
@@ -26,8 +27,15 @@ int main(int argc, char *argv[])
     // apertura fifo
     fd = open("pipe", O_RDONLY);
 
+    // controllo apertura fifo
+    if (fd < 0)
+    {
+        printf("Errore apertura fifo \n");
+        exit(-1);
+    }
+
     // lettura da fifo e scrittura su file
-    ftruncate(fileno(destinazione), 0);
+    //ftruncate(fileno(destinazione), 0);
     while ((n = read(fd, buffer, sizeof(buffer))) > 0)
     {
         fwrite(buffer, 1, sizeof(buffer), destinazione);

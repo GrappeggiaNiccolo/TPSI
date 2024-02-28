@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         }
 
         buffer[n] = '\0';
-        printf("Messaggio: %s", buffer);
+        printf("Messaggio: %s\n\n", buffer);
 
         close(fd[0]); // figlio chiude la lettura
         exit(0);
@@ -58,6 +58,6 @@ int main(int argc, char *argv[])
 
     close(fd[1]); // padre chiude la scrittura
 
-    printf("\nWait (PID figlio): %d\n", wait(&status)); // aspetta che il figlio finisca/muoia
+    //printf("\nWait (PID figlio): %d\n", wait(&status)); // aspetta che il figlio finisca/muoia
     return 0;
 }
