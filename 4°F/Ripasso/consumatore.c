@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     unsigned char buffer[BUFF_SIZE];
 
     // apertura file
-    destinazione = fopen("destinazione.txt", "w");
+    destinazione = fopen("studenti.txt", "w");
 
     // controllo apertura file
     if (destinazione == NULL)
