@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+int main(int argc, char *argv[])
+{
+    printf("Il mio pid è %d\n", getpid());
+    execl("./nuovoProcesso", "nuovoProcesso", NULL); // il processo termina ed esegue il nuovo processo
+    printf("Che ci fai qui?");
+}
