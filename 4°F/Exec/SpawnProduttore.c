@@ -24,7 +24,7 @@ int spawn(char program[], char *argument[]) // il suo PC punta al figlio. Progra
         return -1;
     }
 
-    if (p = 0)
+    if (p > 0)
     {
         printf("Sono il padre, PID: %d", getpid()); // pid figlio = pid consumatore
         return 0;                                   // success code
@@ -36,12 +36,12 @@ int spawn(char program[], char *argument[]) // il suo PC punta al figlio. Progra
     }
 
     execv(program, argument); // rispetto alla execl, invece di mettere i parametri passo un vettore
-
+    // program è una stringa, argument è un array di stringhe; | Program é "./consumatore.sh", cioè il percorso del file da eseguire
     printf("\nErrore execv");
     abort();
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) // ./produttore.sh fileOrigine.txt fileDestinazione.txt
 {
     FILE *file;
     int fifo;
@@ -54,12 +54,15 @@ int main(int argc, char *argv[])
     if (argc != 3)
     {
         printf("Per mandare in esecuzione produttore.exe ");
+        return 0;
     }
 
     // ./consumatore.sh destinazione.txt NULL
 
-    arg[0] = (char *)malloc(strlen(PROGRAM) + 1); // strlen va incrementato di uno sennò perde il terminatore
-    arg[1] = (char *)malloc(strlen(argv[2]) + 1);
+    arg[0] = (char *)malloc(strlen(PROGRAM) + 1); // strlen va incrementato di uno sennò perde il terminatore, questo è lo spazio di memoria allocato per immagazzinare l'indirizzo di program
+    strcpy(arg[0], PROGRAM);
+
+    arg[1] = (char *)malloc(strlen(argv[2]) + 1); // nome del file, terminatore incluso
     strcpy(arg[1], argv[2]);
 
     arg[2] = NULL;
@@ -75,7 +78,7 @@ int main(int argc, char *argv[])
     printf("\narg[0] = %s \n", arg[0]); // controllo se è ./consumatore.sh
 
     // creazione fifo
-    if (mkfifo("fifo", 0777) < 0)
+    if (mkfifo("my_fifo", 0777) < 0)
     {
         if (errno != EEXIST)
         {
@@ -84,7 +87,7 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    fifo = open("fifo", O_WRONLY);
+    fifo = open("my_fifo", O_WRONLY);
 
     if (fifo < 0)
     {
