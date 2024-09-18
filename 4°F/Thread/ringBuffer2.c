@@ -1,7 +1,14 @@
 /*in linguaggio c creare 2 thread, il primo genera una sequenza di N numeri casuali,
  con N fornito come argomento della riga di comando, e li inserisce singolarmente in un ring-buffer,
   il secondo preleva i numeri dal ring-buffer condiviso e li visualizza.
-la codifica dovrà prevedere la necessaria sincronizzazione fra thread consumatore e thread produttore.*/
+la codifica dovrà prevedere la necessaria sincronizzazione fra thread consumatore e thread produttore.
+
+Creare un programma in C che legge le prime 32 lettere di un file di testo e stampa la lettera inserita dall'utente per ogni occorrenza (Es: se l'utente inserisce la lettera 'a' e questa si trova 2 volte
+nelle 32 lettere il programma dovrà stampare a video: 
+'trovata la lettera a
+trovata la lettera a'
+La lettura dei dati dal file deve essere fatta con un thread, mentre la ricerca della lettera tra i dati letti deve essere fatta tramite quattro thread con carico bilanciato
+)*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
