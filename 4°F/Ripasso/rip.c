@@ -30,17 +30,17 @@ int main(int argc, char *argv[]) {
         close(fd[1]);
 
         // apertura file
-        FILE *file = fopen("destinazione.txt", "w");
+        FILE *file = fopen("studenti.txt", "w");
         if (file == NULL) {
             perror("Errore apertura file");
             exit(EXIT_FAILURE);
         }
 
         // lettura pipe
-        read(fd[0], &sArray, sizeof(Studente) * N);
+        read(fd[0], &sArray, sizeof(sArray));
         
         // scrittura nel file
-        fwrite(sArray, sizeof(Studente), N, file);
+        fwrite(sArray, sizeof(sArray), N, file);
 
         // chiusura file
         fclose(file);

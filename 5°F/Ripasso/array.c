@@ -37,25 +37,37 @@ int Menu()
     printf("9) Ordini il vettore (ordinamento a scelta)\n\n");
     // scelta utente
     scanf("%d", &scelta);
-    return(scelta);
+    return (scelta);
 }
 
-void Visualizza()
+void RiempiArray(int array[], int arrLength)
 {
-    int n;
-    printf("Premere invio per tornare al menu");
-    scanf("%d", &n);
+    // inserimento numeri casuali nell'array
+    for (int i = 0; i < arrLength; i++)
+    {
+        array[i] = rand() % 100;
+    }
+}
+
+void Visualizza(int array[], int arrLength)
+{
+    for (int i = 0; i < arrLength; i++)
+    {
+        printf("%d°) %d\n", i + 1, array[i]);
+    }
+
     Menu();
 }
 
-void ChiamaFunzione(int scelta) {
+void ChiamaFunzione(int scelta, int array[], int arrlength)
+{
     switch (scelta)
     {
     case 0:
         exit(0);
         break;
     case 1:
-        Visualizza();
+        Visualizza(array, arrlength);
         break;
     }
 }
@@ -67,9 +79,10 @@ int main(int argc, char *argv[])
     scanf("%d", &arrLength);
 
     int array[arrLength];
+    RiempiArray(array, arrLength);
 
     // Menù e scelta
-    ChiamaFunzione(Menu());
+    ChiamaFunzione(Menu(), array, arrLength);
 
     return 0;
 }
