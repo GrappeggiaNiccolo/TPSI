@@ -77,6 +77,7 @@ int main(int argc, char *argv[])
     printf("\n2) La stringa 1 contiene la lettera '%c' %d volte\n", c, num);
 
     // 3)
+    char PariDispari[2];
 
     return 0;
 }
