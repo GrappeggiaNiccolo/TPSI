@@ -86,7 +86,7 @@ void stampa_libri(struct Libro libri[], int count) {
 
 int main() {
     struct Libro libri[MAX_LIBRI];  // Array di struct per memorizzare i libri
-    int count = EsportaCSV("libri.csv", libri, MAX_LIBRI);  // Leggi i dati dal CSV
+    int count = EsportaCSV("libreria_libri.csv", libri, MAX_LIBRI);  // Leggi i dati dal CSV
 
     if (count > 0) {
         printf("Sono stati letti %d libri dal file CSV:\n", count);
