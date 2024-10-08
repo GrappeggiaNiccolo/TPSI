@@ -21,18 +21,22 @@ Sarà vostro compito decidere come rappresentare questi dati e implementare le f
 
 #define MAX_LINE_LENGTH 1024
 #define MAX_LIBRI 100
+#define MAX_TITOLO 100  
+#define MAX_AUTORE 50 
+#define MAX_CATEGORIA 30
+#define FILE_BINARIO "libreria.bin"  // Nome del file binario per la persistenza
 
 // Definizione della struct Libro
 struct Libro {
-    char titolo[20];
-    char autore[20];
+    char titolo[MAX_TITOLO];
+    char autore[MAX_AUTORE];
     int anno;
     float prezzo;
-    char categoria[20];  // Campo che verrà lasciato vuoto
+    char categoria[MAX_CATEGORIA];  // Campo per la categoria
 };
 
 // Funzione per leggere il CSV e salvare i dati nella struct
-int EsportaCSV(const char *filename, struct Libro libri[], int max_libri) {
+int leggi_csv(const char *filename, struct Libro libri[], int max_libri) {
     FILE *file = fopen(filename, "r");
     if (!file) {
         perror("Errore nell'apertura del file");
@@ -76,37 +80,119 @@ int EsportaCSV(const char *filename, struct Libro libri[], int max_libri) {
     return count;  // Ritorna il numero di libri letti
 }
 
-// Funzione per stampare i libri
-void stampa_libri(struct Libro libri[], int count) {
+// Funzione per salvare i dati dei libri in un file binario
+void salva_file_binario(const char *filename, struct Libro libri[], int count) {
+    FILE *file = fopen(filename, "wb");
+    if (!file) {
+        perror("Errore nell'apertura del file binario per la scrittura");
+        return;
+    }
+
+    fwrite(libri, sizeof(struct Libro), count, file);  // Scrive l'array di struct nel file binario
+    fclose(file);
+}
+
+// Funzione per caricare i dati dal file binario
+int carica_file_binario(const char *filename, struct Libro libri[], int max_libri) {
+    FILE *file = fopen(filename, "rb");
+    if (!file) {
+        return -1;  // Se il file non esiste, ritorna -1
+    }
+
+    int count = fread(libri, sizeof(struct Libro), max_libri, file);  // Legge l'array di struct dal file binario
+    fclose(file);
+    return count;
+}
+
+// Funzione per stampare i libri in formato tabellare, incluso il campo "categoria"
+void Visualizza(struct Libro libri[], int count, const char *categoria) {
+    printf("--------------------------------------------------------------------------\n");
+    printf("| %-31s | %-30s | %-4s | %-6s | %-15s |\n", "Titolo", "Autore", "Anno", "Prezzo", "Categoria");
+    printf("--------------------------------------------------------------------------\n");
+
     for (int i = 0; i < count; i++) {
-        printf("Titolo: %s, Autore: %s, Anno: %d, Prezzo: %.2f, Categoria: %s\n", 
+        // Se la categoria fornita non è nulla e non corrisponde, salta il libro
+        if (categoria != NULL && strlen(categoria) > 0 && strcmp(libri[i].categoria, categoria) != 0) {
+            continue;
+        }
+
+        // Stampa il libro in formato tabellare
+        printf("| %-31s | %-30s | %-4d | %-6.2f | %-15s |\n", 
                libri[i].titolo, libri[i].autore, libri[i].anno, libri[i].prezzo, libri[i].categoria);
     }
+
+    printf("--------------------------------------------------------------------------\n");
+}
+
+// Funzione per inserire manualmente le categorie dei libri
+void inserisci_categorie(struct Libro libri[], int count) {
+    for (int i = 0; i < count; i++) {
+        printf("Inserisci la categoria per il libro '%s': ", libri[i].titolo);
+        fgets(libri[i].categoria, sizeof(libri[i].categoria), stdin);
+        // Rimuove il carattere di newline che fgets aggiunge
+        libri[i].categoria[strcspn(libri[i].categoria, "\n")] = 0;
+    }
+
+    // Salva l'array aggiornato nel file binario
+    salva_file_binario(FILE_BINARIO, libri, count);
+}
+
+// Menu con le opzioni per l'utente
+void menu(struct Libro libri[], int count) {
+    int scelta;
+
+    do {
+        // Stampa il menu
+        printf("\n--- Menu ---\n");
+        printf("1. Inserisci categorie manualmente\n");
+        printf("2. Visualizza tutti i libri\n");
+        printf("3. Un'altra opzione (vuota per ora)\n");
+        printf("0. Esci\n");
+        printf("Scegli un'opzione: ");
+        scanf("%d", &scelta);
+        getchar();  // Per consumare il newline rimasto nel buffer di input
+
+        switch (scelta) {
+            case 1:
+                inserisci_categorie(libri, count);  // Inserisci le categorie e salva nel file binario
+                break;
+            case 2:
+                Visualizza(libri, count, NULL);  // Visualizza tutti i libri senza filtro
+                break;
+            case 3:
+                printf("Opzione vuota al momento.\n");
+                break;
+            case 0:
+                printf("Uscita dal programma.\n\n");
+                break;
+            default:
+                printf("Opzione non valida, riprova.\n");
+        }
+    } while (scelta != 0);
 }
 
 int main() {
     struct Libro libri[MAX_LIBRI];  // Array di struct per memorizzare i libri
-    int count = EsportaCSV("libreria_libri.csv", libri, MAX_LIBRI);  // Leggi i dati dal CSV
+    int count;
+
+    // Prova a caricare i dati dal file binario
+    count = carica_file_binario(FILE_BINARIO, libri, MAX_LIBRI);
 
     if (count > 0) {
-        printf("Sono stati letti %d libri dal file CSV:\n", count);
-        stampa_libri(libri, count);  // Stampa i libri letti
-
-        // Esempio di inserimento manuale della categoria
-        for (int i = 0; i < count; i++) {
-            printf("Inserisci la categoria per il libro '%s': ", libri[i].titolo);
-            fgets(libri[i].categoria, sizeof(libri[i].categoria), stdin);
-            // Rimuove il carattere di newline che fgets aggiunge
-            libri[i].categoria[strcspn(libri[i].categoria, "\n")] = 0;
-        }
-
-        // Stampa i libri con le categorie inserite
-        printf("\nLibri aggiornati con le categorie:\n");
-        stampa_libri(libri, count);
+        printf("Sono stati caricati %d libri dal file binario.\n", count);
     } else {
-        printf("Errore durante la lettura del file CSV.\n");
+        // Se il file binario non esiste, leggi i dati dal CSV
+        count = leggi_csv("libreria_libri.csv", libri, MAX_LIBRI);
+        if (count > 0) {
+            printf("Sono stati letti %d libri dal file CSV.\n", count);
+        } else {
+            printf("Errore durante la lettura del file CSV.\n");
+            return 1;  // Esci in caso di errore
+        }
     }
+
+    // Mostra il menu all'utente
+    menu(libri, count);
 
     return 0;
 }
-
