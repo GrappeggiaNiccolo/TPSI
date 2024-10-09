@@ -120,9 +120,9 @@ int carica_file_binario(const char *filename, struct Libro libri[], int max_libr
 // Funzione per stampare i libri in formato tabellare, incluso il campo "categoria"
 void Visualizza(struct Libro libri[], int count, const char *categoria)
 {
-    printf("--------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------------------------\n");
     printf("| %-31s | %-30s | %-4s | %-6s | %-15s |\n", "Titolo", "Autore", "Anno", "Prezzo", "Categoria");
-    printf("--------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < count; i++)
     {
@@ -137,7 +137,7 @@ void Visualizza(struct Libro libri[], int count, const char *categoria)
                libri[i].titolo, libri[i].autore, libri[i].anno, libri[i].prezzo, libri[i].categoria);
     }
 
-    printf("--------------------------------------------------------------------------\n");
+    printf("------------------------------------------------------------------------------------------------------\n");
 }
 
 // Funzione per inserire manualmente le categorie dei libri
@@ -169,6 +169,40 @@ void visualizza_libri_per_categoria(struct Libro libri[], int count)
     Visualizza(libri, count, categoria); // Stampa solo i libri della categoria specificata
 }
 
+// Funzione per cercare un libro specifico in base al titolo
+void cerca_libro_per_titolo(struct Libro libri[], int count)
+{
+    char titolo[MAX_TITOLO];
+
+    // Chiede all'utente di inserire il titolo del libro da cercare
+    printf("Inserisci il titolo del libro da cercare: ");
+    fgets(titolo, sizeof(titolo), stdin);
+    titolo[strcspn(titolo, "\n")] = 0; // Rimuove il newline
+
+    // Cerca il libro corrispondente al titolo inserito
+    int trovato = 0;
+    for (int i = 0; i < count; i++)
+    {
+        if (strcasecmp(libri[i].titolo, titolo) == 0) // Confronto case-insensitive
+        {
+            // Se il libro è trovato, stampa i dettagli
+            printf("\nLibro trovato:\n");
+            printf("Titolo: %s\n", libri[i].titolo);
+            printf("Autore: %s\n", libri[i].autore);
+            printf("Anno: %d\n", libri[i].anno);
+            printf("Prezzo: %.2f\n", libri[i].prezzo);
+            printf("Categoria: %s\n", libri[i].categoria);
+            trovato = 1;
+            break;
+        }
+    }
+
+    if (!trovato)
+    {
+        printf("Nessun libro trovato con il titolo '%s'.\n", titolo);
+    }
+}
+
 // Menu con le opzioni per l'utente
 void menu(struct Libro libri[], int count)
 {
@@ -181,6 +215,7 @@ void menu(struct Libro libri[], int count)
         printf("1. Inserisci categorie manualmente\n");
         printf("2. Visualizza tutti i libri\n");
         printf("3. Visualizza libri per categoria\n");
+        printf("4. Cerca un libro per titolo\n");
         printf("0. Esci\n");
         printf("Scegli un'opzione: ");
         scanf("%d", &scelta);
@@ -196,6 +231,9 @@ void menu(struct Libro libri[], int count)
             break;
         case 3:
             visualizza_libri_per_categoria(libri, count); // Visualizza i libri di una specifica categoria
+            break;
+        case 4:
+            cerca_libro_per_titolo(libri, count); // Cerca un libro per titolo
             break;
         case 0:
             printf("Uscita dal programma.\n\n");
