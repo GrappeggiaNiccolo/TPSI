@@ -10,7 +10,7 @@
 #include <unistd.h>     // file header che consente l'accesso alle API dello standard POSIX
 
 #define DIM 50 // Per creazione stringa
-#define SERVERPORT 1313 // numro di porta logica, corrisponde a quella del client
+#define SERVERPORT 1313 // numero di porta logica, corrisponde a quella del server
 
 int main(int argc,char** argv)
 {   //creazione di un elemento di tipo sockaddr vedi pagina 162

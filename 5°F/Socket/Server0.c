@@ -32,7 +32,7 @@ int main()
     // ciclo infinito
     while (1)
     {
-        printf("\n\nServer in ascolto...\n");
+        printf("\nServer in ascolto...\n");
         fflush(stdout); // pulisce il canale, alcune stringhe hanno dei caratteri che "sporcano il messaggio"
         // il server accetta la connessione pag. 165
         soa = accept(socketfd, (struct sockaddr *)&addr_remoto, &fromlen);
