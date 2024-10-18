@@ -76,6 +76,9 @@ void main()
         write(connessione, &numVoc, sizeof(numVoc));
         write(connessione, &numCons, sizeof(numCons));
 
+        numVoc = 0;
+        numCons = 0;
+
         close(connessione);
     }
 }
