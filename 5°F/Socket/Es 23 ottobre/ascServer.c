@@ -74,10 +74,9 @@ void main()
         // lettura array dalla socket, leggo il numero di bytes ricevuti
         bytes = read(connessione, arr, sizeof(arr));
 
-        // minimo e massimo
+        // array in ordine crescente
         size = bytes / sizeof(arr[0]);
-        min = Min(arr, size);
-        max = Max(arr, size);
+        Crescente(arr, size);
 
         // scrittura nella socket
         write(connessione, arr, sizeof(arr));
