@@ -1,0 +1,21 @@
+{
+    "domande_aperta": [
+        {"id": 1, "testo": "Spiega cos'è un socket in C e a cosa serve."},
+        {"id": 2, "testo": "Descrivi i passaggi principali per creare un socket server in C."},
+        {"id": 3, "testo": "Quali sono le principali differenze tra TCP e UDP nei socket in C?"}
+    ],
+    "domande_crocetta": [
+        {
+            "id": "A",
+            "testo": "Quale funzione è usata per creare un socket in C?",
+            "opzioni": ["socket()", "bind()", "connect()", "accept()"],
+            "corretta": "socket()"
+        },
+        {
+            "id": "B",
+            "testo": "Quale funzione associa un socket a un indirizzo IP e una porta?",
+            "opzioni": ["socket()", "bind()", "listen()", "send()"],
+            "corretta": "bind()"
+        }
+    ]
+}

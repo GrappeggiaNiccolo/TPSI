@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Domanda Aperta</title>
+</head>
+<body>
+    <div class="container">
+        <div id="timer">10:00</div>
+        <h1>Domanda <span id="contatore">0/5</span></h1>
+        <p id="domanda"></p>
+        <textarea id="risposta" rows="5" placeholder="Scrivi la tua risposta qui..."></textarea>
+        <br>
+        <button id="precedente">Precedente</button>
+        <button id="successivo">Successivo</button>
+    </div>
+    <script src="function.js"></script>
+    <script>
+        if (!timerInterval) avviaTimer();
+        inizializzaPagina('aperta');
+    </script>
+</body>
+</html>
