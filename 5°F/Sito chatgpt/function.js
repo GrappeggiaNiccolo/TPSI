@@ -5,18 +5,27 @@ let tempoRimanente = 10 * 60; // 10 minuti in secondi
 // Inizializza il timer di 10 minuti
 function avviaTimer() {
     const timerElement = document.getElementById('timer');
+
+    // Recupera il tempo rimanente dal localStorage o imposta 10 minuti
+    tempoRimanente = parseInt(localStorage.getItem('tempoRimanente')) || 10 * 60;
+
+    timerElement.innerText = `${Math.floor(tempoRimanente / 60)}:${(tempoRimanente % 60).toString().padStart(2, '0')}`;
+
     timerInterval = setInterval(() => {
         if (tempoRimanente <= 0) {
             clearInterval(timerInterval);
+            localStorage.removeItem('tempoRimanente'); // Rimuovi il tempo dal localStorage
             salvaInFile(); // Salva automaticamente le risposte alla fine
             alert("Tempo scaduto! Risposte salvate.");
-            location.href = "index.html";
+            location.href = "index.html"; // Torna alla homepage
         } else {
             tempoRimanente--;
+            localStorage.setItem('tempoRimanente', tempoRimanente); // Salva il tempo rimanente
             timerElement.innerText = `${Math.floor(tempoRimanente / 60)}:${(tempoRimanente % 60).toString().padStart(2, '0')}`;
         }
     }, 1000);
 }
+
 
 // Carica domande dal file JSON
 async function caricaDomande() {
@@ -68,27 +77,40 @@ function salvaRispostaAutomatica(tipo) {
 
 // Inizializza pagina con navigazione e caricamento risposte
 async function inizializzaPagina(tipo) {
-    const id = parseInt(new URLSearchParams(window.location.search).get('id')) || new URLSearchParams(window.location.search).get('id');
-    const domande = await caricaDomande();
-    let domanda, indice;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id'); // Ottieni l'ID dall'URL
 
+    if (!id) {
+        alert("Parametro ID mancante! Verrai reindirizzato alla homepage.");
+        location.href = 'index.html';
+        return;
+    }    
+
+    const domande = await caricaDomande();
+
+    // Controlla se l'ID è valido
+    let domanda, indice;
     if (tipo === 'aperta') {
         domanda = domande.domande_aperta.find(d => d.id === parseInt(id));
         indice = domande.domande_aperta.findIndex(d => d.id === parseInt(id));
-        if (!domanda) {
-            alert("Domanda non trovata!");
-            return;
-        }
+    } else if (tipo === 'crocetta') {
+        domanda = domande.domande_crocetta.find(d => d.id === id);
+        indice = domande.domande_crocetta.findIndex(d => d.id === id);
+    }
+
+    // Se la domanda non è trovata, reindirizza alla homepage
+    if (!domanda) {
+        alert("Domanda non trovata! Verrai reindirizzato alla homepage.");
+        location.href = 'index.html';
+        return;
+    }
+
+    // Mostra la domanda e le risposte in base al tipo
+    if (tipo === 'aperta') {
         document.getElementById('domanda').innerText = domanda.testo;
         document.getElementById('risposta').value = caricaRisposta(id);
         document.getElementById('risposta').addEventListener('input', () => salvaRispostaAutomatica(tipo));
     } else if (tipo === 'crocetta') {
-        domanda = domande.domande_crocetta.find(d => d.id === id);
-        indice = domande.domande_crocetta.findIndex(d => d.id === id);
-        if (!domanda) {
-            alert("Domanda non trovata!");
-            return;
-        }
         document.getElementById('domanda').innerText = domanda.testo;
 
         // Carica opzioni di risposta
@@ -110,31 +132,70 @@ async function inizializzaPagina(tipo) {
         });
     }
 
-    configuraNavigazione(tipo, indice, domande);
+    // Configura la navigazione
+    configuraNavigazione(tipo, id, domande);
 }
 
+
+
+
 // Configurazione dei pulsanti di navigazione
-function configuraNavigazione(tipo, indice, domande) {
+function configuraNavigazione(tipo, id, domande) {
     const precedenteButton = document.getElementById('precedente');
     const successivoButton = document.getElementById('successivo');
+    const contatoreElement = document.getElementById('contatore');
 
-    const listaDomande = tipo === 'aperta' ? domande.domande_aperta : domande.domande_crocetta;
+    // Unifica tutte le domande in un unico array con un ordine sequenziale
+    const tutteLeDomande = [
+        ...domande.domande_aperta.map(d => ({ ...d, tipo: 'aperta' })),
+        ...domande.domande_crocetta.map(d => ({ ...d, tipo: 'crocetta' }))
+    ];
 
-    if (indice > 0) {
-        const domandaPrecedente = listaDomande[indice - 1];
-        const nuovoTipo = domandaPrecedente.id <= 3 ? 'aperta' : 'crocetta';
-        precedenteButton.onclick = () => vaiA(nuovoTipo, domandaPrecedente.id);
+    // Trova la domanda corrente
+    const domandaAttuale = tutteLeDomande.find(d => d.tipo === tipo && d.id == id);
+    const indiceGlobale = tutteLeDomande.indexOf(domandaAttuale);
+
+    // Aggiorna il contatore (es. "Domanda 2/5")
+    contatoreElement.innerText = `${indiceGlobale + 1}/${tutteLeDomande.length}`;
+
+    // Configura il pulsante "Precedente"
+    if (indiceGlobale > 0) {
+        const domandaPrecedente = tutteLeDomande[indiceGlobale - 1];
+        precedenteButton.onclick = () => vaiA(domandaPrecedente.tipo, domandaPrecedente.id);
         precedenteButton.disabled = false;
     } else {
-        precedenteButton.disabled = true;
+        precedenteButton.disabled = true; // Disabilita se è la prima domanda
     }
 
-    if (indice < listaDomande.length - 1) {
-        const domandaSuccessiva = listaDomande[indice + 1];
-        const nuovoTipo = domandaSuccessiva.id <= 3 ? 'aperta' : 'crocetta';
-        successivoButton.onclick = () => vaiA(nuovoTipo, domandaSuccessiva.id);
+    // Configura il pulsante "Successivo"
+    if (indiceGlobale < tutteLeDomande.length - 1) {
+        const domandaSuccessiva = tutteLeDomande[indiceGlobale + 1];
+        successivoButton.onclick = () => vaiA(domandaSuccessiva.tipo, domandaSuccessiva.id);
         successivoButton.disabled = false;
     } else {
-        successivoButton.disabled = true;
+        successivoButton.disabled = true; // Disabilita se è l'ultima domanda
     }
+}
+
+async function correggiTest() {
+    const domande = await caricaDomande(); // Carica le domande dal file JSON
+    const risposteUtente = JSON.parse(localStorage.getItem('risposte')) || {};
+
+    let risposteCorrette = 0;
+
+    // Confronta solo le domande a crocetta
+    domande.domande_crocetta.forEach(domanda => {
+        if (risposteUtente[domanda.id] === domanda.corretta) {
+            risposteCorrette++;
+        }
+    });
+
+    // Mostra il risultato all'utente
+    alert(`Hai risposto correttamente a ${risposteCorrette}/${domande.domande_crocetta.length} domande a crocetta.`);
+
+    // Resetta il test
+    localStorage.clear(); // Cancella tutte le risposte e il tempo rimanente
+    tempoRimanente = 10 * 60; // Reimposta il tempo a 10 minuti
+    clearInterval(timerInterval); // Ferma il timer corrente
+    location.href = 'index.html'; // Riporta l'utente alla homepage
 }

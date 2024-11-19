@@ -10,15 +10,32 @@
 
 <body>
     <div class="container">
-        <h1>Test sui Socket in C</h1>
-        <p>Inizia il test cliccando su una domanda.</p>
-        <div class="bottoni-domande">
-            <button onclick="vaiA('aperta', 1)">Domanda 1</button>
-            <button onclick="vaiA('aperta', 2)">Domanda 2</button>
-            <button onclick="vaiA('aperta', 3)">Domanda 3</button>
-            <button onclick="vaiA('crocetta', 'A')">Domanda A</button>
-            <button onclick="vaiA('crocetta', 'B')">Domanda B</button>
-        </div>
+        <header>
+            <h1>Test sui Socket in C</h1>
+            <p>
+                Metti alla prova le tue conoscenze sui socket in linguaggio C. Rispondi alle domande e scopri il tuo punteggio alla fine del test.
+                Hai **10 minuti** per completare tutte le domande!
+            </p>
+        </header>
+        <main>
+            <section class="domande">
+                <h2>Inizia il Test</h2>
+                <div class="bottoni-domande">
+                    <button onclick="vaiA('aperta', 1)">Domanda 1</button>
+                    <button onclick="vaiA('aperta', 2)">Domanda 2</button>
+                    <button onclick="vaiA('aperta', 3)">Domanda 3</button>
+                    <button onclick="vaiA('crocetta', 'A')">Domanda A</button>
+                    <button onclick="vaiA('crocetta', 'B')">Domanda B</button>
+                </div>
+            </section>
+            <section class="azione-finali">
+                <h2>Azioni Finali</h2>
+                <button onclick="correggiTest()" id="correggi">Correggi e Resetta il Test</button>
+            </section>
+        </main>
+        <footer>
+            <p>© 2024 Test sui Socket in C - Tutti i diritti riservati.</p>
+        </footer>
     </div>
     <script src="function.js"></script>
 </body>
