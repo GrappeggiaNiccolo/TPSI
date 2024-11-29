@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it" data-bs-theme="light">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Confronto tra i protocolli TCP e UDP nel contesto delle comunicazioni di rete.">
+        <title>Confronto tra TCP e UDP</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet">
+        <link href="style/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Header -->
+        <div id="header-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="container my-5">
+            <!-- Title Section -->
+            <section
+                class="text-center rounded shadow-sm mb-4 border border-light">
+                <h1 class="display-5">Confronto tra TCP e UDP</h1>
+                <p class="lead text-muted">TCP (Transmission Control Protocol) e
+                    UDP (User Datagram Protocol) sono due protocolli
+                    fondamentali nelle comunicazioni di rete. Vediamo le loro
+                    caratteristiche principali e differenze.</p>
+            </section>
+
+            <!-- Introduction Section -->
+            <section class="p-4 rounded shadow-sm mb-5 border border-light">
+                <h2 class="h4">Introduzione ai protocolli TCP e UDP</h2>
+                <p>Il TCP e l'UDP sono due protocolli di trasporto utilizzati
+                    per inviare dati attraverso la rete. Entrambi sono
+                    utilizzati a livello di trasporto del modello OSI, ma si
+                    differenziano per modalità di trasmissione e garanzie
+                    fornite.</p>
+            </section>
+
+            <!-- TCP vs UDP Comparison Section -->
+            <section class="p-4 rounded shadow-sm mb-5 border border-light">
+                <h2 class="h4 text-center">Confronto tra TCP e UDP</h2>
+                <div class="row">
+                    <!-- TCP -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="card-title">TCP (Transmission Control
+                                    Protocol)</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><strong>Connessione:</strong> Protocollo
+                                        orientato alla connessione.</li>
+                                    <li><strong>Affidabilità:</strong>
+                                        Garantisce la consegna dei dati con
+                                        controllo degli errori e gestione della
+                                        congestione.</li>
+                                    <li><strong>Ordine dei dati:</strong> I dati
+                                        vengono ricevuti nell'ordine
+                                        corretto.</li>
+                                    <li><strong>Velocità:</strong> Più lento
+                                        rispetto a UDP, a causa dei meccanismi
+                                        di controllo.</li>
+                                    <li><strong>Uso:</strong> Adatto per
+                                        applicazioni che richiedono alta
+                                        affidabilità, come HTTP, FTP,
+                                        e-mail.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UDP -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header bg-warning text-dark">
+                                <h5 class="card-title">UDP (User Datagram
+                                    Protocol)</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><strong>Connessione:</strong> Protocollo
+                                        senza connessione.</li>
+                                    <li><strong>Affidabilità:</strong> Non
+                                        garantisce la consegna dei dati, non ha
+                                        meccanismi di controllo.</li>
+                                    <li><strong>Ordine dei dati:</strong> I dati
+                                        potrebbero non arrivare nell'ordine
+                                        corretto.</li>
+                                    <li><strong>Velocità:</strong> Più veloce
+                                        rispetto a TCP, ma meno affidabile.</li>
+                                    <li><strong>Uso:</strong> Adatto per
+                                        applicazioni che richiedono alta
+                                        velocità e tollerano la perdita di
+                                        pacchetti, come streaming video o giochi
+                                        online.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Comparison Table -->
+            <section class="p-4 rounded shadow-sm mb-5 border border-light">
+                <h2 class="h4 text-center">Tabella Comparativa</h2>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Caratteristica</th>
+                            <th>TCP</th>
+                            <th>UDP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Connessione</td>
+                            <td>Orientato alla connessione</td>
+                            <td>Senza connessione</td>
+                        </tr>
+                        <tr>
+                            <td>Affidabilità</td>
+                            <td>Alta (controllo degli errori)</td>
+                            <td>Bassa (nessun controllo)</td>
+                        </tr>
+                        <tr>
+                            <td>Velocità</td>
+                            <td>Lenta (a causa del controllo)</td>
+                            <td>Veloce</td>
+                        </tr>
+                        <tr>
+                            <td>Ordine dei dati</td>
+                            <td>Garantito</td>
+                            <td>Non garantito</td>
+                        </tr>
+                        <tr>
+                            <td>Uso</td>
+                            <td>HTTP, FTP, e-mail</td>
+                            <td>Streaming, giochi online</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+
+        <!-- Scripts -->
+        <script src="scripts/header.js"></script>
+        <script src="scripts/footer.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="scripts/dark_theme.js"></script>
+    </body>
+</html>
