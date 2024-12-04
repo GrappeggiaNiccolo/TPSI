@@ -45,7 +45,7 @@ footer {
 
 .card {
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .card:hover {
@@ -57,6 +57,11 @@ footer {
 .dark-mode .card {
     background-color: #343a40;
     color: #f8f9fa;
+}
+
+/* Section */
+section {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Accordion */
@@ -166,6 +171,6 @@ table td {
     background-color: #495057;
 }
 
-section p, h2, h5, .card, table, td, tr, th, .list-group-item, .list-group {
+section p, h2, h5, .card, table, td, tr, th, .list-group-item, .list-group, .accordion, .accordion-collapse {
     transition: background-color 0.7s ease, color 0.7s ease;
 }

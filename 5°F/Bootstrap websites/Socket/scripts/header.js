@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const headerHTML = `
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="index.html">Socket Guide</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -22,4 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </nav>
     `;
     document.getElementById("header-placeholder").innerHTML = headerHTML;
+
+    // Aggiungi margine superiore al body
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar.offsetHeight; // Altezza della navbar
+    document.body.style.paddingTop = `${navbarHeight}px`;
 });
