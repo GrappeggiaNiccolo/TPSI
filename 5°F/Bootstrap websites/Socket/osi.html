@@ -1,225 +1,49 @@
 <!DOCTYPE html>
 <html lang="it" data-bs-theme="light">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="La pila ISO/OSI descrive le funzioni di rete in sette livelli, standardizzando le comunicazioni tra sistemi informatici.">
-        <title>Pila ISO/OSI</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-            rel="stylesheet">
-        <link href="style/styles.css" rel="stylesheet">
-    </head>
-    <body>
-        <!-- Header -->
-        <div id="header-placeholder"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="La pila ISO/OSI descrive le funzioni di rete in sette livelli, standardizzando le comunicazioni tra sistemi informatici.">
+    <title id="page-title">Caricamento...</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="style/styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
 
-        <!-- Main Content -->
-        <main class="container my-5">
-            <!-- Title Section -->
-            <section
-                class="text-center rounded shadow-sm mb-4 border border-light">
-                <h1 class="display-5">Pila ISO/OSI</h1>
-                <p class="lead text-muted">La Pila ISO/OSI è un modello
-                    concettuale che descrive il funzionamento delle reti di
-                    telecomunicazione in 7 livelli.</p>
-            </section>
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Title Section -->
+        <section class="text-center rounded shadow-sm mb-4 border border-light">
+            <h1 id="hero-title" class="display-5">Caricamento...</h1>
+            <p id="hero-subtitle" class="lead text-muted">La Pila ISO/OSI è un modello concettuale che descrive il funzionamento delle reti di telecomunicazione in 7 livelli.</p>
+        </section>
 
-            <!-- Introduction Section -->
-            <section class="p-4 rounded shadow-sm mb-5 border border-light">
-                <div class="row align-items-center">
-                    <!-- Colonna immagine -->
-                    <div class="col-md-4">
-                        <img
-                            src="https://mikrotikusers.com/content/images/size/w960/2024/08/osi_layers.png"
-                            alt="ISO/OSI"
-                            class="img-fluid"
-                            style="max-width: 100%; height: auto;">
-                    </div>
+        <!-- Introduction Section -->
+        <section id="intro" class="p-4 rounded shadow-sm mb-5 border border-light">
+            <!-- Questo contenuto verrà popolato dinamicamente -->
+        </section>
 
-                    <!-- Colonna testo -->
-                    <div class="col-md-8">
-                        <h2 class="h4">Introduzione al modello ISO/OSI</h2>
-                        <p>Il modello ISO/OSI è stato sviluppato per
-                            standardizzare le comunicazioni tra sistemi
-                            informatici, suddividendo le funzioni di rete in
-                            sette livelli:</p>
-                        <p><strong>Fisico</strong>, <strong>Collegamento
-                                dati</strong>, <strong>Rete</strong>,
-                            <strong>Trasporto</strong>,
-                            <strong>Sessione</strong>,
-                            <strong>Presentazione</strong>,
-                            <strong>Applicazione</strong></p>
-                    </div>
-                </div>
-            </section>
+        <!-- ISO/OSI Levels Accordion -->
+        <section class="border border-light rounded">
+            <h2 class="text-center mb-4" id="accordion-title">Livelli del modello ISO/OSI</h2>
+            <div class="accordion" id="osiAccordion">
+            </div>
+        </section>
+    </main>
 
-            <!-- ISO/OSI Levels Accordion -->
-            <section class="border border-light rounded">
-                <h2 class="text-center mb-4">Livelli del modello ISO/OSI</h2>
-                <div class="accordion" id="osiAccordion">
-                    <!-- Level 1 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading1">
-                            <button class="accordion-button" type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapse1" aria-expanded="true"
-                                aria-controls="collapse1">
-                                Livello 1: Fisico
-                            </button>
-                        </h2>
-                        <div id="collapse1"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="heading1"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Come il nome suggerisce, il livello fisico si
-                                occupa della strumentazione che consente il
-                                trasferimento dei dati, come cavi e router. Gli
-                                standard per la trasmissione di rete sono
-                                essenziali in questo livello. Senza tali
-                                standard, la trasmissione tra produttori di
-                                dispositivi differenti sarebbe impossibile.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Level 2 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading2">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse2"
-                                aria-expanded="false" aria-controls="collapse2">
-                                Livello 2: Collegamento dati
-                            </button>
-                        </h2>
-                        <div id="collapse2" class="accordion-collapse collapse"
-                            aria-labelledby="heading2"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Si occupa del trasferimento di dati tra due
-                                dispositivi adiacenti in una rete e include il
-                                controllo degli errori e la gestione
-                                dell'accesso al mezzo fisico.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Level 3 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading3">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse3"
-                                aria-expanded="false" aria-controls="collapse3">
-                                Livello 3: Rete
-                            </button>
-                        </h2>
-                        <div id="collapse3" class="accordion-collapse collapse"
-                            aria-labelledby="heading3"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Fornisce l'instradamento dei dati tra nodi non
-                                direttamente collegati, utilizzando indirizzi IP
-                                e protocolli di routing.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Additional Levels -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading4">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse4"
-                                aria-expanded="false" aria-controls="collapse4">
-                                Livello 4: Trasporto
-                            </button>
-                        </h2>
-                        <div id="collapse4" class="accordion-collapse collapse"
-                            aria-labelledby="heading4"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Garantisce la consegna affidabile dei dati tra i
-                                sistemi finali, gestendo problemi come il
-                                controllo del flusso e la segmentazione dei
-                                dati.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading5">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse5"
-                                aria-expanded="false" aria-controls="collapse5">
-                                Livello 5: Sessione
-                            </button>
-                        </h2>
-                        <div id="collapse5" class="accordion-collapse collapse"
-                            aria-labelledby="heading5"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Gestisce l'inizio, la durata e la fine delle
-                                sessioni di comunicazione tra le applicazioni.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading6">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse6"
-                                aria-expanded="false" aria-controls="collapse6">
-                                Livello 6: Presentazione
-                            </button>
-                        </h2>
-                        <div id="collapse6" class="accordion-collapse collapse"
-                            aria-labelledby="heading6"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Converte i dati in un formato comprensibile tra
-                                diversi sistemi, gestendo la crittografia e la
-                                compressione.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading7">
-                            <button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse7"
-                                aria-expanded="false" aria-controls="collapse7">
-                                Livello 7: Applicazione
-                            </button>
-                        </h2>
-                        <div id="collapse7" class="accordion-collapse collapse"
-                            aria-labelledby="heading7"
-                            data-bs-parent="#osiAccordion">
-                            <div class="accordion-body">
-                                Rappresenta il livello più alto, offrendo
-                                interfacce e servizi per l'utente finale, come
-                                il trasferimento di file, la posta elettronica e
-                                la navigazione web.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
-        <!-- Footer -->
-        <div id="footer-placeholder"></div>
-
-        <!-- Script inclusi -->
-        <script src="scripts/header.js"></script>
-        <script src="scripts/footer.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="scripts/dark_theme.js"></script>
-    </body>
+    <!-- Script inclusi -->
+    <script src="json/osiContent.js"></script>
+    <script src="scripts/loadOsi.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/footer.js"></script>
+    <script src="scripts/dark_theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

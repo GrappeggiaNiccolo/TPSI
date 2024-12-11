@@ -3,18 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="Informazioni approfondite sulle socket, come funzionano e la loro importanza nelle reti.">
+        <meta name="description" content="Informazioni approfondite sulle socket, come funzionano e la loro importanza nelle reti.">
         <title>Socket - Dettagli</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-            rel="stylesheet">
-        <link href="style/styles.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="style/styles.css" rel="stylesheet">
     </head>
     <body>
         <!-- Header -->
@@ -22,135 +16,21 @@
 
         <!-- Main Content -->
         <main class="container my-5">
-            <!-- Hero Section -->
-            <section
-                class="text-center rounded shadow-sm mb-4 border border-light">
-                <div class="container">
-                    <h1>Le Socket: La base della comunicazione in rete</h1>
-                    <p class="lead">Scopri come le socket permettono la
-                        connessione tra client e server nel mondo digitale.</p>
-                </div>
-            </section>
-
-            <!-- Prima sezione: Definizione e dettagli -->
-            <section
-                class="row my-5 align-items-center rounded border border-light">
-                <!-- Testo -->
-                <div class="col-md-6">
-                    <h2>Cos'è una Socket?</h2>
-                    <p>
-                        Una <strong>socket</strong> è un'interfaccia per la
-                        comunicazione tra processi, utilizzata per creare una
-                        connessione tra due sistemi.
-                        È fondamentale per i protocolli di rete come TCP e UDP,
-                        e permette di inviare e ricevere dati in modo efficace.
-                    </p>
-                </div>
-                <!-- Immagine -->
-                <div class="col-md-6">
-                    <img
-                        src="https://socket.io/assets/images/homepage-server-40e4108715950ea259baf9ff4a30d3ef.png"
-                        class="img-fluid rounded"
-                        alt="Immagine socket">
-                </div>
-            </section>
-
-            <!-- Tipi di Socket -->
-            <section class="my-5 rounded border border-light">
-                <h2 class="text-center">Tipi di Socket</h2>
-                <!-- Cards con Bootstrap -->
-                <div class="row justify-content-center">
-                    <div class="col-md-5">
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Stream Socket (TCP)</h5>
-                                <p class="card-text">Fornisce una comunicazione
-                                    affidabile e ordinata basata sul protocollo
-                                    TCP. Ideale per applicazioni come il
-                                    trasferimento di file o email.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Datagram Socket
-                                    (UDP)</h5>
-                                <p class="card-text">Offre comunicazione veloce
-                                    ma senza garanzie di consegna, basandosi sul
-                                    protocollo UDP. Utilizzato spesso per lo
-                                    streaming o i giochi online.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Modello Client-Server -->
-            <section class="my-5 rounded border border-light p-3">
-                <h2 class="text-center mb-4">Socket nel Modello
-                    Client-Server</h2>
-                <!-- Layout con Bootstrap -->
-                <div class="row align-items-center">
-                    <!-- Immagine -->
-                    <div class="col-md-5">
-                        <img
-                            src="https://darvishdarab.github.io/cs421_f20/assets/images/client-server-1-d85a93ea16590c10bed340dd78294d0d.png"
-                            class="img-fluid rounded shadow"
-                            alt="Modello client-server">
-                    </div>
-                    <!-- Testo -->
-                    <div class="col-md-7">
-                        <div class="p-4 rounded shadow-sm">
-                            <p>
-                                Nel modello <strong>client-server</strong>, una
-                                socket viene utilizzata per stabilire una
-                                connessione tra il client, che invia richieste,
-                                e il server, che le elabora e risponde. Questo
-                                modello è alla base di applicazioni come:
-                            </p>
-                            <div class="row">
-                                <div class="col-6">
-                                    <ul class="list-group">
-                                        <li class="list-group-item"><i
-                                                class="bi bi-envelope"></i>
-                                            Email</li>
-                                        <li class="list-group-item"><i
-                                                class="bi bi-cloud"></i>
-                                            Archiviazione cloud</li>
-                                        <li class="list-group-item"><i
-                                                class="bi bi-browser-chrome"></i>
-                                            Navigazione web</li>
-                                    </ul>
-                                </div>
-                                <div class="col-6">
-                                    <ul class="list-group">
-                                        <li class="list-group-item"><i
-                                                class="bi bi-phone"></i>
-                                            Videochiamate</li>
-                                        <li class="list-group-item"><i
-                                                class="bi bi-music-note"></i>
-                                            Streaming musicale</li>
-                                        <li class="list-group-item"><i
-                                                class="bi bi-controller"></i>
-                                            Gaming online</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
+            <section id="hero-section" class="text-center rounded shadow-sm mb-4 border border-light"></section>
+            <section id="definition-section" class="row my-5 align-items-center rounded border border-light"></section>
+            <section id="socket-types-section" class="my-5 rounded border border-light"></section>
+            <section id="client-server-section" class="my-5 rounded border border-light p-3"></section>
+        </main>        
 
         <!-- Footer -->
         <div id="footer-placeholder"></div>
 
         <!-- Script inclusi -->
+        <script src="scripts/dark_theme.js"></script>
         <script src="scripts/header.js"></script>
         <script src="scripts/footer.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="scripts/dark_theme.js"></script>
+        <script src="json/socketsContent.js"></script>
+        <script src="scripts/loadSockets.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

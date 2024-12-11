@@ -3,18 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="Glossario con i termini specifici utilizzati nel sito, con relative definizioni.">
+        <meta name="description" content="Glossario con i termini specifici utilizzati nel sito, con relative definizioni.">
         <title>Glossario - Terminologia di Rete</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-            rel="stylesheet">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-            rel="stylesheet">
-        <link href="style/styles.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="style/styles.css" rel="stylesheet">
     </head>
     <body>
         <!-- Header -->
@@ -23,84 +17,12 @@
         <!-- Main Content -->
         <main class="container my-5">
             <!-- Title Section -->
-            <section
-                class="text-center rounded shadow-sm mb-4 border border-light">
-                <h1 class="display-5">Glossario dei Termini di Rete</h1>
-                <p class="lead text-muted">Un elenco dei termini tecnici
-                    utilizzati nel nostro sito, con le relative definizioni.</p>
-            </section>
+            <section id="title-section" class="text-center rounded shadow-sm mb-4 border border-light"></section>
 
             <!-- Glossary Section -->
             <section class="p-4 rounded shadow-sm mb-5 border border-light">
                 <h2 class="h4 text-center">Termini e Definizioni</h2>
-                <div class="list-group">
-                    <!-- Term 1 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">TCP (Transmission Control
-                            Protocol)</h5>
-                        <p class="mb-1">Protocollo orientato alla connessione
-                            che garantisce la consegna dei dati in modo
-                            affidabile, controllando gli errori e gestendo il
-                            flusso di dati tra due dispositivi.</p>
-                    </a>
-                    <!-- Term 2 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">UDP (User Datagram Protocol)</h5>
-                        <p class="mb-1">Protocollo senza connessione che invia
-                            pacchetti di dati senza garantire la loro consegna,
-                            utilizzato per applicazioni che richiedono alta
-                            velocità e tollerano la perdita di pacchetti.</p>
-                    </a>
-                    <!-- Term 3 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">Modello OSI</h5>
-                        <p class="mb-1">Modello concettuale che descrive come i
-                            dati vengono trasmessi in una rete. È suddiviso in
-                            sette livelli: fisico, collegamento dati, rete,
-                            trasporto, sessione, presentazione e
-                            applicazione.</p>
-                    </a>
-                    <!-- Term 4 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">IP (Internet Protocol)</h5>
-                        <p class="mb-1">Protocollo di rete che si occupa
-                            dell'indirizzamento e del routing dei pacchetti di
-                            dati tra dispositivi in una rete, utilizzando
-                            indirizzi IP univoci.</p>
-                    </a>
-                    <!-- Term 5 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">Ethernet</h5>
-                        <p class="mb-1">Tecnologia di rete utilizzata per le
-                            comunicazioni locali tramite cavi fisici. È il
-                            metodo più comune per connettere dispositivi in una
-                            rete locale (LAN).</p>
-                    </a>
-                    <!-- Term 6 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">DNS (Domain Name System)</h5>
-                        <p class="mb-1">Sistema che traduce i nomi di dominio
-                            (come www.example.com) in indirizzi IP, permettendo
-                            così di accedere ai siti web tramite nomi facili da
-                            ricordare.</p>
-                    </a>
-                    <!-- Term 7 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">Firewall</h5>
-                        <p class="mb-1">Dispositivo o software che controlla il
-                            traffico di rete in ingresso e in uscita,
-                            proteggendo una rete da accessi non autorizzati o
-                            dannosi.</p>
-                    </a>
-                    <!-- Term 8 -->
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <h5 class="mb-1">VPN (Virtual Private Network)</h5>
-                        <p class="mb-1">Tecnologia che consente di creare una
-                            connessione sicura e criptata su una rete pubblica,
-                            come Internet, per proteggere la privacy e la
-                            sicurezza dei dati.</p>
-                    </a>
-                </div>
+                <div id="glossary-list" class="list-group"></div>
             </section>
         </main>
 
@@ -108,10 +30,11 @@
         <div id="footer-placeholder"></div>
 
         <!-- Scripts -->
+        <script src="scripts/dark_theme.js"></script>
         <script src="scripts/header.js"></script>
         <script src="scripts/footer.js"></script>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="scripts/dark_theme.js"></script>
+        <script src="json/glossaryContent.js"></script>
+        <script src="scripts/loadGlossary.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
