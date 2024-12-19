@@ -3,11 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="Introduzione alle socket e al loro funzionamento in informatica e reti.">
         <title>Socket - Homepage</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="style/styles.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet">
         <link href="style/styles.css" rel="stylesheet">
     </head>
     <body>
@@ -15,32 +21,166 @@
         <div id="header-placeholder"></div>
 
         <!-- Hero Section -->
-        <header id="hero" class="hero text-center"></header>
+        <header class="hero text-center">
+            <div class="container">
+                <h1>Benvenuto nella guida alle Socket</h1>
+                <p class="lead">Scopri cosa sono le socket, come funzionano e
+                    perché sono fondamentali nel networking.</p>
+                <a href="sockets.html" class="btn btn-light btn-lg mt-3">Inizia
+                    ora</a>
+            </div>
+        </header>
 
         <!-- Content Section -->
         <main class="container my-5">
-            <!-- Accordion -->
-            <section>
+            <section class="rounded">
                 <h2 class="text-center mb-4">Cos'è una socket?</h2>
-                <div id="accordion" class="accordion"></div>
+
+                <!-- Accordion -->
+                <div class="accordion" id="socketAccordion">
+                    <!-- Punto 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne"
+                                aria-expanded="true"
+                                aria-controls="collapseOne">
+                                Punto 1: Definizione di socket
+                            </button>
+                        </h2>
+                        <div id="collapseOne"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="headingOne"
+                            data-bs-parent="#socketAccordion">
+                            <div class="accordion-body">
+                                Una <strong>socket</strong> è un punto di
+                                comunicazione tra due applicazioni che operano
+                                in rete. Consente lo scambio di dati tramite
+                                protocolli di trasporto come TCP e UDP.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Punto 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo"
+                                aria-expanded="false"
+                                aria-controls="collapseTwo">
+                                Punto 2: Tipi di socket
+                            </button>
+                        </h2>
+                        <div id="collapseTwo"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingTwo"
+                            data-bs-parent="#socketAccordion">
+                            <div class="accordion-body">
+                                Esistono due tipi principali di socket:
+                                <ul>
+                                    <li><strong>Stream Socket:</strong> Basate
+                                        su TCP, offrono una comunicazione
+                                        affidabile.</li>
+                                    <li><strong>Datagram Socket:</strong> Basate
+                                        su UDP, per una comunicazione veloce ma
+                                        meno affidabile.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Punto 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="false"
+                                aria-controls="collapseThree">
+                                Punto 3: Socket nel modello client-server
+                            </button>
+                        </h2>
+                        <div id="collapseThree"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="headingThree"
+                            data-bs-parent="#socketAccordion">
+                            <div class="accordion-body">
+                                Le socket sono utilizzate nel modello
+                                <strong>client-server</strong> per creare una
+                                connessione tra il client (che richiede un
+                                servizio) e il server (che lo fornisce).
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Cards Section -->
-            <section class="mt-5">
+            <section class="mt-5 rounded">
                 <h2 class="text-center mb-4">Argomenti Principali</h2>
-                <div id="cards" class="row"></div>
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4YTM_dqDkYyHaKwHI9mhez1HGhMpTvwVaSA&s"
+                                class="card-img-top" alt="Socket">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Socket</h5>
+                                <p class="card-text">Scopri le basi delle
+                                    socket, i loro tipi e il loro funzionamento
+                                    nel contesto client-server.</p>
+                                <a href="sockets.html"
+                                    class="btn btn-primary">Leggi di più</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img
+                                src="https://static.wixstatic.com/media/bb5dcc_257608418e614ae8a6b52ca40a45d809~mv2.jpg/v1/fill/w_980,h_420,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/bb5dcc_257608418e614ae8a6b52ca40a45d809~mv2.jpg"
+                                class="card-img-top" alt="OSI Model">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Modello OSI</h5>
+                                <p class="card-text">Approfondisci il modello
+                                    OSI, con particolare attenzione al livello
+                                    di trasporto.</p>
+                                <a href="osi.html" class="btn btn-primary">Leggi
+                                    di più</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img
+                                src="https://media.licdn.com/dms/image/v2/D4D12AQGAkp_W0K-wuw/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1704047634787?e=2147483647&v=beta&t=9z5G-EjbDir8sqUrOEFjiqjbu9qN64lWyDcBNqm3QjE"
+                                class="card-img-top" alt="TCP vs UDP">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">TCP vs UDP</h5>
+                                <p class="card-text">Confronta i due principali
+                                    protocolli di comunicazione e scopri le loro
+                                    differenze.</p>
+                                <a href="tcp-udp.html"
+                                    class="btn btn-primary">Leggi di più</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
 
         <!-- Footer -->
         <div id="footer-placeholder"></div>
 
-        <!-- Scripts -->
+        <!-- Script Bootrap -->
         <script src="scripts/header.js"></script>
         <script src="scripts/footer.js"></script>
-        <script src="json/indexContent.js"></script> <!-- Include dati -->
-        <script src="scripts/loadIndex.js"></script> <!-- Popola la pagina -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="scripts/dark_theme.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
