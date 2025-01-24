@@ -1,0 +1,48 @@
+{
+    "header": {
+        "title": "Benvenuto nel nostro e-commerce!"
+    },
+    "footer": "© 2025 E-commerce. Tutti i diritti riservati.",
+    "archive": {
+        "title": "Archivio Prodotti",
+        "products": [
+            {
+                "id": 1,
+                "name": "Prodotto 1",
+                "description": "Descrizione prodotto 1",
+                "price": "10.00 €"
+            },
+            {
+                "id": 2,
+                "name": "Prodotto 2",
+                "description": "Descrizione prodotto 2",
+                "price": "20.00 €"
+            }
+        ]
+    },
+    "product": {
+        "title": "Dettagli Prodotto",
+        "details": {
+            "name": "Prodotto 1",
+            "description": "Descrizione completa prodotto 1",
+            "price": "10.00 €"
+        }
+    },
+    "cart": {
+        "title": "Il tuo carrello",
+        "items": [
+            {
+                "name": "Prodotto 1",
+                "quantity": 1,
+                "price": "10.00 €"
+            },
+            {
+                "name": "Prodotto 2",
+                "quantity": 2,
+                "price": "40.00 €"
+            }
+        ],
+        "total": "50.00 €"
+    }
+}
+    
