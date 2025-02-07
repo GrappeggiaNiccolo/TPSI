@@ -31,6 +31,10 @@ footer {
     background-color: #495057;
     color: white;
     padding: 10px 0;
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .dark-mode footer {

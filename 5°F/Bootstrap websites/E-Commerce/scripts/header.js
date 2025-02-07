@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbarHTML = `
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">E-commerce</a>
+                <a class="navbar-brand" href="index.html">E-commerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <a class="nav-link active" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="product.html">Prodotto</a>
+                            <a class="nav-link" href="shop.html">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="cart.html">Carrello</a>
@@ -29,8 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // HTML per il Footer
     const footerHTML = `
-        <footer class="bg-light text-center py-3">
-            <p class="mb-0">© 2025 E-commerce. Tutti i diritti riservati.</p>
+        <footer class="text-center">
+            <div class="container">
+                <p>Realizzato da Niccolò Grappeggia - Classe 5°F</p>
+                <p>
+                    <a href="https://github.com/GrappeggiaNiccolo/TPSI/tree/main/5%C2%B0F/Bootstrap%20websites/"
+                        class="text-white" target="_blank">Github Repository</a>
+                </p>
+            </div>
         </footer>
     `;
 

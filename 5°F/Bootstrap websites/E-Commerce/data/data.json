@@ -1,0 +1,49 @@
+{
+    "archive": {
+        "title": "Archivio Prodotti",
+        "products": [
+            {
+                "id": 1,
+                "name": "Laptop Pro",
+                "description": "Prestazioni elevate per i professionisti",
+                "price": "1200 €",
+                "image": "images/laptop.jpg"
+            },
+            {
+                "id": 2,
+                "name": "Smartphone X",
+                "description": "Fotocamera avanzata e display OLED",
+                "price": "800 €",
+                "image": "images/smartphone.jpg"
+            },
+            {
+                "id": 3,
+                "name": "Auricolari Wireless",
+                "description": "Suono cristallino e cancellazione del rumore",
+                "price": "150 €",
+                "image": "images/auricolari.jpg"
+            }
+        ]
+    },
+    "product": {
+        "title": "Dettagli Prodotto"
+    },
+    "cart": {
+        "title": "Il tuo carrello",
+        "items": [
+            {
+                "name": "Laptop Pro",
+                "quantity": 1,
+                "price": "1200 €",
+                "image": "images/laptop.jpg"
+            },
+            {
+                "name": "Smartphone X",
+                "quantity": 2,
+                "price": "1600 €",
+                "image": "images/smartphone.jpg"
+            }
+        ],
+        "total": "2800 €"
+    }
+}
