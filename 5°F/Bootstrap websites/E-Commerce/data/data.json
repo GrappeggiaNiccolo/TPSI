@@ -7,21 +7,24 @@
                 "name": "Laptop Pro",
                 "description": "Prestazioni elevate per i professionisti",
                 "price": "1200 €",
-                "image": "images/laptop.jpg"
+                "image": "images/laptop.jpg",
+                "stock": 15
             },
             {
                 "id": 2,
                 "name": "Smartphone X",
                 "description": "Fotocamera avanzata e display OLED",
                 "price": "800 €",
-                "image": "images/smartphone.jpg"
+                "image": "images/smartphone.jpg",
+                "stock": 8
             },
             {
                 "id": 3,
                 "name": "Auricolari Wireless",
                 "description": "Suono cristallino e cancellazione del rumore",
                 "price": "150 €",
-                "image": "images/auricolari.jpg"
+                "image": "images/auricolari.jpg",
+                "stock": 20
             }
         ]
     },

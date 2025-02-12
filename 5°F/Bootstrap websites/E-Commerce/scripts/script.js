@@ -3,81 +3,157 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             const path = window.location.pathname;
+            const queryParams = new URLSearchParams(window.location.search);
 
-            if (path.includes("index.html")) {
-                // Archivio Prodotti
-                document.getElementById("title").textContent = data.archive.title;
-                const productList = document.getElementById("product-list");
-
-                data.archive.products.forEach(product => {
-                    const col = document.createElement("div");
-                    col.className = "col-md-4 mb-4";
-                    col.innerHTML = `
-                        <div class="card h-100 shadow-sm">
-                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text">${product.description}</p>
-                                <p class="card-text fw-bold">${product.price}</p>
-                                <a href="product.html?id=${product.id}" class="btn btn-primary">Dettagli</a>
-                            </div>
-                        </div>
-                    `;
-                    productList.appendChild(col);
-                });
-
-            } else if (path.includes("product.html")) {
-                // Singolo Prodotto
-                const queryParams = new URLSearchParams(window.location.search);
-                const productId = queryParams.get("id");
-                const product = data.archive.products.find(p => p.id == productId);
-
-                if (product) {
-                    document.getElementById("product-title").textContent = data.product.title;
-                    const productDetails = document.getElementById("product-details");
-                    productDetails.innerHTML = `
-                        <img src="${product.image}" class="img-fluid mb-3" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>${product.description}</p>
-                        <p class="fw-bold">${product.price}</p>
-                        <button class="btn btn-success">Aggiungi al carrello</button>
-                    `;
-                } else {
-                    document.getElementById("product-details").innerHTML = `<p class="text-danger">Prodotto non trovato.</p>`;
-                }
-
+            if (path.includes("product.html")) {
+                loadProductPage(data, queryParams);
             } else if (path.includes("cart.html")) {
-                // Carrello
-                document.getElementById("cart-title").textContent = data.cart.title;
-                const cartItems = document.getElementById("cart-items");
-                let total = 0;
-
-                data.cart.items.forEach(item => {
-                    const row = document.createElement("tr");
-                    const itemTotal = parseFloat(item.price.replace("€", "").trim()) * item.quantity;
-                    total += itemTotal;
-
-                    row.innerHTML = `
-                        <td><img src="${item.image}" width="50" alt="${item.name}"></td>
-                        <td>${item.name}</td>
-                        <td>${item.quantity}</td>
-                        <td>${item.price}</td>
-                        <td>${itemTotal.toFixed(2)} €</td>
-                        <td><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></td>
-                    `;
-
-                    cartItems.appendChild(row);
-                });
-
-                document.getElementById("cart-total").textContent = `Totale: ${total.toFixed(2)} €`;
-
-                // Rimuovi prodotto dal carrello
-                document.querySelectorAll(".remove-item").forEach(button => {
-                    button.addEventListener("click", (event) => {
-                        event.target.closest("tr").remove();
-                    });
-                });
+                loadCart();
+            } else if (path.includes("index.html")) {
+                loadProductList(data);
             }
         })
         .catch(error => console.error("Errore nel caricamento del JSON:", error));
 });
+
+// Funzione per caricare la pagina di un prodotto
+function loadProductPage(data, queryParams) {
+    const productId = queryParams.get("id");
+    const product = data.archive.products.find(p => p.id == productId);
+
+    if (product) {
+        document.querySelector("img.img-fluid").src = product.image;
+        document.querySelector("img.img-fluid").alt = product.name;
+        document.getElementById("product-title").textContent = product.name;
+        document.getElementById("product-description").textContent = product.description;
+        document.getElementById("product-price").textContent = product.price;
+        
+        let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
+        if (!productsStock[product.id]) {
+            productsStock[product.id] = product.stock;
+        }
+
+        document.getElementById("product-quantity").max = productsStock[product.id];
+        document.getElementById("stock-info").textContent = `Disponibili: ${productsStock[product.id]}`;
+
+        // Gestione quantità
+        const quantityInput = document.getElementById("product-quantity");
+        document.getElementById("increase-qty").addEventListener("click", () => {
+            if (parseInt(quantityInput.value) < productsStock[product.id]) {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            }
+        });
+        document.getElementById("decrease-qty").addEventListener("click", () => {
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        });
+
+        // 🛒 Evento "Aggiungi al Carrello"
+        document.getElementById("add-to-cart").addEventListener("click", () => {
+            addToCart(product, parseInt(quantityInput.value));
+        });
+    } else {
+        document.querySelector("main").innerHTML = "<h2 class='text-danger'>Prodotto non trovato</h2>";
+    }
+}
+
+// Funzione per aggiungere un prodotto al carrello
+function addToCart(product, quantity) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
+
+    if (quantity > productsStock[product.id]) {
+        alert("Quantità non disponibile!");
+        return;
+    }
+
+    const existingProduct = cart.find(item => item.id === product.id);
+    if (existingProduct) {
+        existingProduct.quantity += quantity;
+    } else {
+        cart.push({ ...product, quantity });
+    }
+
+    productsStock[product.id] -= quantity;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("productsStock", JSON.stringify(productsStock));
+
+    alert("Prodotto aggiunto al carrello!");
+    document.getElementById("stock-info").textContent = `Disponibili: ${productsStock[product.id]}`;
+}
+
+// Funzione per caricare il carrello
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartItems = document.getElementById("cart-items");
+    let total = 0;
+
+    cartItems.innerHTML = "";
+
+    cart.forEach(item => {
+        const itemTotal = parseFloat(item.price.replace("€", "").trim()) * item.quantity;
+        total += itemTotal;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><img src="${item.image}" width="50" alt="${item.name}"></td>
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>${item.price}</td>
+            <td>${itemTotal.toFixed(2)} €</td>
+            <td><button class="btn btn-danger btn-sm remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></button></td>
+        `;
+
+        cartItems.appendChild(row);
+    });
+
+    document.getElementById("cart-total").textContent = `Totale: ${total.toFixed(2)} €`;
+
+    document.querySelectorAll(".remove-item").forEach(button => {
+        button.addEventListener("click", (event) => {
+            removeFromCart(event.target.closest("button").dataset.id);
+        });
+    });
+}
+
+// Funzione per rimuovere un prodotto dal carrello e ripristinare lo stock
+function removeFromCart(productId) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
+
+    const productToRemove = cart.find(item => item.id == productId);
+    if (productToRemove) {
+        productsStock[productId] += productToRemove.quantity;
+        cart = cart.filter(item => item.id != productId);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("productsStock", JSON.stringify(productsStock));
+
+        loadCart();
+    }
+}
+
+// Funzione per caricare l'elenco prodotti sulla home page
+function loadProductList(data) {
+    document.getElementById("title").textContent = data.archive.title;
+    const productList = document.getElementById("product-list");
+
+    data.archive.products.forEach(product => {
+        const col = document.createElement("div");
+        col.className = "col-md-4 mb-4";
+        col.innerHTML = `
+            <div class="card h-100 shadow-sm">
+                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text">${product.description}</p>
+                    <p class="card-text fw-bold">${product.price}</p>
+                    <a href="product.html?id=${product.id}" class="btn btn-primary">Dettagli</a>
+                </div>
+            </div>
+        `;
+        productList.appendChild(col);
+    });
+}

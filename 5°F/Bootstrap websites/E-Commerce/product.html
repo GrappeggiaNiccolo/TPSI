@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it" data-bs-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="header-placeholder"></div>
@@ -20,9 +22,19 @@
                 <img src="images/prodotto.jpg" alt="Prodotto" class="img-fluid rounded">
             </div>
             <div class="col-md-6">
-                <h1 id="product-title" class="mb-3">Nome Prodotto</h1>
-                <p id="product-description" class="mb-4">Descrizione dettagliata del prodotto.</p>
-                <p class="h4 text-danger mb-4" id="product-price">€99.99</p>
+                <h1 id="product-title" class="mb-3"></h1>
+                <p id="product-description" class="mb-4"></p>
+                <p class="h4 text-danger mb-4" id="product-price"></p>
+
+                <!-- Selezione Quantità -->
+                <div class="d-flex align-items-center mb-3">
+                    <button class="btn btn-outline-secondary" id="decrease-qty">-</button>
+                    <input type="number" id="product-quantity" class="form-control text-center mx-1 w-25" value="1" min="1" max="1" readonly>
+                    <button class="btn btn-outline-secondary" id="increase-qty">+</button>
+                </div>
+                <p id="stock-info" class="text-muted"><span id="stock-value">0</span></p>
+
+                <!-- Pulsante Carrello -->
                 <button class="btn btn-primary btn-lg" id="add-to-cart">Aggiungi al Carrello</button>
             </div>
         </div>
@@ -33,9 +45,9 @@
 
     <!-- Scripts -->
     <script src="scripts/header.js"></script>
-    <script src="scripts/footer.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/dark_theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
