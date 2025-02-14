@@ -29,10 +29,14 @@ function loadProductPage(data, queryParams) {
         document.getElementById("product-price").textContent = product.price;
         
         let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
-        if (!productsStock[product.id]) {
-            productsStock[product.id] = product.stock;
+
+        // NON sovrascrivere lo stock se esiste già nel localStorage
+        if (!(product.id in productsStock)) {
+            productsStock[product.id] = product.stock;  // Solo se non esiste già
+            localStorage.setItem("productsStock", JSON.stringify(productsStock)); // Salva lo stock iniziale
         }
 
+        // Usa sempre lo stock aggiornato da localStorage
         document.getElementById("product-quantity").max = productsStock[product.id];
         document.getElementById("stock-info").textContent = `Disponibili: ${productsStock[product.id]}`;
 
@@ -57,6 +61,7 @@ function loadProductPage(data, queryParams) {
         document.querySelector("main").innerHTML = "<h2 class='text-danger'>Prodotto non trovato</h2>";
     }
 }
+
 
 // Funzione per aggiungere un prodotto al carrello
 function addToCart(product, quantity) {
@@ -116,6 +121,21 @@ function loadCart() {
             removeFromCart(event.target.closest("button").dataset.id);
         });
     });
+
+    // Quando si acquistano i prodotti, il carrello si svuota
+    document.getElementById("cart-payment").addEventListener("click", (event) => {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+        if (cart.length === 0) {
+            alert("Il carrello è vuoto! Aggiungi prodotti prima di procedere all'acquisto.");
+            return; // Blocca l'acquisto se il carrello è vuoto
+        }
+    
+        alert("I prodotti sono stati acquistati con successo!");
+        localStorage.removeItem("cart");
+        loadCart();
+    });
+    
 }
 
 // Funzione per rimuovere un prodotto dal carrello e ripristinare lo stock
@@ -135,25 +155,29 @@ function removeFromCart(productId) {
     }
 }
 
-// Funzione per caricare l'elenco prodotti sulla home page
+// Funzione per caricare i prodotti nel carousel
 function loadProductList(data) {
-    document.getElementById("title").textContent = data.archive.title;
-    const productList = document.getElementById("product-list");
+    document.querySelector("h2").textContent = data.archive.title; // Imposta il titolo della sezione
 
-    data.archive.products.forEach(product => {
-        const col = document.createElement("div");
-        col.className = "col-md-4 mb-4";
-        col.innerHTML = `
-            <div class="card h-100 shadow-sm">
-                <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text">${product.description}</p>
-                    <p class="card-text fw-bold">${product.price}</p>
-                    <a href="product.html?id=${product.id}" class="btn btn-primary">Dettagli</a>
-                </div>
+    const carouselItems = document.getElementById("carousel-items");
+
+    // Prendi i primi 3 prodotti per il carosello
+    const featuredProducts = data.archive.products.slice(0, 3);
+
+    featuredProducts.forEach((product, index) => {
+        const activeClass = index === 0 ? "active" : ""; // Solo il primo elemento deve essere attivo
+        const item = document.createElement("div");
+        item.className = `carousel-item ${activeClass}`;
+        item.innerHTML = `
+            <img src="${product.image}" class="d-block w-100" alt="${product.name}">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
+                <h5>${product.name}</h5>
+                <p>${product.description}</p>
+                <p class="fw-bold">${product.price}</p>
+                <a href="product.html?id=${product.id}" class="btn btn-primary">Scopri di più</a>
             </div>
         `;
-        productList.appendChild(col);
+        carouselItems.appendChild(item);
     });
 }
+
