@@ -1,40 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Carica i dati dal file JSON
-    fetch('data.json')
+    fetch('data/data.json')
         .then(response => response.json())
         .then(data => {
-            // Carica il titolo dell'header
-            const headerTitle = data.header.title;
-            document.querySelector("#hero h1").textContent = headerTitle;
-
-            // Carica il titolo della sezione prodotti
-            const archiveTitle = data.archive.title;
+            // Imposta il titolo
             const archiveHeading = document.querySelector("main h2");
-            archiveHeading.textContent = archiveTitle;
+            archiveHeading.textContent = data.archive.title;
 
-            // Carica i prodotti nella sezione "Archivio Prodotti"
+            // Seleziona il contenitore delle cards
             const cardsContainer = document.getElementById("cards");
+            cardsContainer.innerHTML = ""; // Pulisce prima di aggiungere
+
             data.archive.products.forEach(product => {
                 const col = document.createElement("div");
-                col.className = "col-md-4 mb-4";
+                col.classList.add("col-md-4"); // Aggiunge classe correttamente
                 col.innerHTML = `
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
+                    <div class="card h-100">
+                        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body text-center">
                             <h5 class="card-title">${product.name}</h5>
                             <p class="card-text">${product.description}</p>
-                            <p class="card-text fw-bold">${product.price}</p>
-                            <a href="#" class="btn btn-primary">Dettagli</a>
+                            <a href="product.html?id=${product.id}" class="btn btn-primary">Dettagli</a>
+                            <button class="btn btn-success">Aggiungi al carrello</button>
                         </div>
                     </div>
                 `;
-                cardsContainer.appendChild(col);
+                cardsContainer.appendChild(col); // Aggiunge al contenitore
             });
 
-            // Carica il footer
+            // Imposta il footer
             const footer = document.getElementById("footer-placeholder");
             footer.textContent = data.footer;
         })
-        .catch(error => {
-            console.error('Errore nel caricare i dati:', error);
-        });
+        .catch(error => console.log('Errore nel caricare i dati:', error));
 });
+

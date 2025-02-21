@@ -12,9 +12,9 @@
             },
             {
                 "id": 2,
-                "name": "Smartphone X",
-                "description": "Fotocamera avanzata e display OLED",
-                "price": "800 €",
+                "name": "Nokia 3310",
+                "description": "Ergonomico e tascabile",
+                "price": "50 €",
                 "image": "images/smartphone.jpg",
                 "stock": 8
             },
@@ -48,5 +48,8 @@
             }
         ],
         "total": "2800 €"
+    },
+    "index": {
+        "title": "Home"
     }
 }

@@ -27,7 +27,7 @@ function loadProductPage(data, queryParams) {
         document.getElementById("product-title").textContent = product.name;
         document.getElementById("product-description").textContent = product.description;
         document.getElementById("product-price").textContent = product.price;
-        
+
         let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
 
         // NON sovrascrivere lo stock se esiste già nel localStorage
@@ -53,7 +53,7 @@ function loadProductPage(data, queryParams) {
             }
         });
 
-        // 🛒 Evento "Aggiungi al Carrello"
+        // Aggiungi al Carrello
         document.getElementById("add-to-cart").addEventListener("click", () => {
             addToCart(product, parseInt(quantityInput.value));
         });
@@ -93,9 +93,18 @@ function addToCart(product, quantity) {
 function loadCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let cartItems = document.getElementById("cart-items");
+    let cartMessage = document.getElementById("cart-message");
     let total = 0;
 
     cartItems.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartMessage.textContent = "Carrello vuoto, aggiungere un prodotto al carrello per completare il checkout";
+        cartMessage.classList.remove("d-none"); // Mostra il messaggio
+        return 0;
+    } else {
+        cartMessage.classList.add("d-none"); // Nasconde il messaggio se il carrello ha prodotti
+    }
 
     cart.forEach(item => {
         const itemTotal = parseFloat(item.price.replace("€", "").trim()) * item.quantity;
@@ -125,17 +134,16 @@ function loadCart() {
     // Quando si acquistano i prodotti, il carrello si svuota
     document.getElementById("cart-payment").addEventListener("click", (event) => {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
+
         if (cart.length === 0) {
             alert("Il carrello è vuoto! Aggiungi prodotti prima di procedere all'acquisto.");
-            return; // Blocca l'acquisto se il carrello è vuoto
+            return 0; // Blocca l'acquisto se il carrello è vuoto
         }
-    
+
         alert("I prodotti sono stati acquistati con successo!");
         localStorage.removeItem("cart");
         loadCart();
     });
-    
 }
 
 // Funzione per rimuovere un prodotto dal carrello e ripristinare lo stock
