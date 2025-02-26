@@ -4,8 +4,9 @@
         "products": [
             {
                 "id": 1,
-                "name": "Laptop Pro",
-                "description": "Prestazioni elevate per i professionisti",
+                "name": "Samsung Galaxy A55 5G",
+                "full-name": "Samsung Galaxy A55 5G Display FHD+ Super AMOLED 6.6”, Android 14, 8GB RAM, 256GB, Dual SIM, Batteria 5.000 mAh",
+                "specs":"Specifiche tecniche:",
                 "price": "1200 €",
                 "image": "images/laptop.jpg",
                 "stock": 15
@@ -32,22 +33,7 @@
         "title": "Dettagli Prodotto"
     },
     "cart": {
-        "title": "Il tuo carrello",
-        "items": [
-            {
-                "name": "Laptop Pro",
-                "quantity": 1,
-                "price": "1200 €",
-                "image": "images/laptop.jpg"
-            },
-            {
-                "name": "Smartphone X",
-                "quantity": 2,
-                "price": "1600 €",
-                "image": "images/smartphone.jpg"
-            }
-        ],
-        "total": "2800 €"
+        "title": "Il tuo carrello"
     },
     "index": {
         "title": "Home"
