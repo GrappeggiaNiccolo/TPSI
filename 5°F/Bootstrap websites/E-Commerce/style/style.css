@@ -188,3 +188,17 @@ table td {
 section p, h2, h5, .card, table, td, tr, th, .list-group-item, .list-group, .accordion, .accordion-collapse {
     transition: background-color 0.7s ease, color 0.7s ease;
 }
+
+.color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid grey;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.color-circle.selected {
+    border: 2px solid black;
+    transform: scale(1.3);
+}

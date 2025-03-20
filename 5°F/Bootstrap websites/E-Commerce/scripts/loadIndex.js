@@ -17,9 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             const cardsContainer = document.getElementById("cards");
-            cardsContainer.innerHTML = ""; // Pulisce prima di aggiungere
+            cardsContainer.innerHTML = ""; // Pulisce il contenitore
 
-            data.archive.products.forEach(product => {
+            // Ordina i prodotti dal più costoso al più economico
+            const sortedProducts = data.archive.products
+                .map(product => ({
+                    ...product,
+                    priceNum: parseFloat(product.price.replace("€", "").trim()) // Converte il prezzo in numero
+                }))
+                .sort((a, b) => b.priceNum - a.priceNum) // Ordina dal più alto al più basso
+                .slice(0, 3); // Prende solo i primi 3 prodotti
+
+            // Mostra i 3 prodotti più costosi
+            sortedProducts.forEach(product => {
                 const col = document.createElement("div");
                 col.classList.add("col-md-4");
                 col.innerHTML = `
@@ -28,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="card-body text-center">
                             <h5 class="card-title">${product.name}</h5>
                             <p class="card-text">${product.description}</p>
+                            <p class="card-price"><strong>Prezzo: ${product.price}</strong></p>
                             <a href="product.html?id=${product.id}" class="btn btn-primary">Dettagli</a>
-                            <button class="btn btn-success">Aggiungi al carrello</button>
                         </div>
                     </div>
                 `;

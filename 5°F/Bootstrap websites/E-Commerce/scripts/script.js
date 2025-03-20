@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Errore nel caricamento del JSON:", error));
 });
-
-// Funzione per caricare la pagina di un prodotto
 function loadProductPage(data, queryParams) {
     const productId = queryParams.get("id");
     const product = data.archive.products.find(p => p.id == productId);
@@ -30,15 +28,32 @@ function loadProductPage(data, queryParams) {
 
         let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
 
-        // NON sovrascrivere lo stock se esiste già nel localStorage
         if (!(product.id in productsStock)) {
-            productsStock[product.id] = product.stock;  // Solo se non esiste già
-            localStorage.setItem("productsStock", JSON.stringify(productsStock)); // Salva lo stock iniziale
+            productsStock[product.id] = product.stock;
+            localStorage.setItem("productsStock", JSON.stringify(productsStock));
         }
 
-        // Usa sempre lo stock aggiornato da localStorage
         document.getElementById("product-quantity").max = productsStock[product.id];
         document.getElementById("stock-info").textContent = `Disponibili: ${productsStock[product.id]}`;
+
+        // Creazione dei pallini colorati
+        const colorContainer = document.getElementById("color-options");
+        colorContainer.innerHTML = ""; // Pulisce il container
+
+        product.colors.forEach((color, index) => {
+            const colorButton = document.createElement("div");
+            colorButton.classList.add("color-circle");
+            colorButton.style.backgroundColor = color;
+            colorButton.dataset.color = color;
+            if (index === 0) colorButton.classList.add("selected"); // Seleziona il primo colore di default
+
+            colorButton.addEventListener("click", () => {
+                document.querySelectorAll(".color-circle").forEach(btn => btn.classList.remove("selected"));
+                colorButton.classList.add("selected");
+            });
+
+            colorContainer.appendChild(colorButton);
+        });
 
         // Gestione quantità
         const quantityInput = document.getElementById("product-quantity");
@@ -55,16 +70,16 @@ function loadProductPage(data, queryParams) {
 
         // Aggiungi al Carrello
         document.getElementById("add-to-cart").addEventListener("click", () => {
-            addToCart(product, parseInt(quantityInput.value));
+            const selectedColor = document.querySelector(".color-circle.selected").dataset.color;
+            addToCart(product, parseInt(quantityInput.value), selectedColor);
         });
     } else {
         document.querySelector("main").innerHTML = "<h2 class='text-danger'>Prodotto non trovato</h2>";
     }
 }
 
-
-// Funzione per aggiungere un prodotto al carrello
-function addToCart(product, quantity) {
+// Modifica della funzione addToCart per includere il colore selezionato
+function addToCart(product, quantity, color) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let productsStock = JSON.parse(localStorage.getItem("productsStock")) || {};
 
@@ -73,11 +88,11 @@ function addToCart(product, quantity) {
         return;
     }
 
-    const existingProduct = cart.find(item => item.id === product.id);
+    const existingProduct = cart.find(item => item.id === product.id && item.color === color);
     if (existingProduct) {
         existingProduct.quantity += quantity;
     } else {
-        cart.push({ ...product, quantity });
+        cart.push({ ...product, quantity, color });
     }
 
     productsStock[product.id] -= quantity;
@@ -85,7 +100,7 @@ function addToCart(product, quantity) {
     localStorage.setItem("cart", JSON.stringify(cart));
     localStorage.setItem("productsStock", JSON.stringify(productsStock));
 
-    alert("Prodotto aggiunto al carrello!");
+    alert(`Prodotto (${color}) aggiunto al carrello!`);
     document.getElementById("stock-info").textContent = `Disponibili: ${productsStock[product.id]}`;
 }
 
@@ -162,30 +177,3 @@ function removeFromCart(productId) {
         loadCart();
     }
 }
-
-// Funzione per caricare i prodotti nel carousel
-function loadProductList(data) {
-    document.querySelector("h2").textContent = data.archive.title; // Imposta il titolo della sezione
-
-    const carouselItems = document.getElementById("carousel-items");
-
-    // Prendi i primi 3 prodotti per il carosello
-    const featuredProducts = data.archive.products.slice(0, 3);
-
-    featuredProducts.forEach((product, index) => {
-        const activeClass = index === 0 ? "active" : ""; // Solo il primo elemento deve essere attivo
-        const item = document.createElement("div");
-        item.className = `carousel-item ${activeClass}`;
-        item.innerHTML = `
-            <img src="${product.image}" class="d-block w-100" alt="${product.name}">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 p-3 rounded">
-                <h5>${product.name}</h5>
-                <p>${product.description}</p>
-                <p class="fw-bold">${product.price}</p>
-                <a href="product.html?id=${product.id}" class="btn btn-primary">Scopri di più</a>
-            </div>
-        `;
-        carouselItems.appendChild(item);
-    });
-}
-
