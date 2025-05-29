@@ -1,0 +1,73 @@
+{
+    "archive": {
+        "title": "Archivio Prodotti",
+        "products": [
+            {
+                "id": 1,
+                "brand": "Samsung",
+                "name": "Samsung Galaxy A55 5G",
+                "full-name": "Samsung Galaxy A55 5G Display FHD+ Super AMOLED 6.6”, Android 14, 8GB RAM, 256GB, Dual SIM, Batteria 5.000 mAh",
+                "description": "8GB RAM, 256GB, Dual SIM",
+                "price": "400 €",
+                "image": "images/a55.jpg",
+                "stock": 15,
+                "colors": ["#37474F", "#A6A6A6", "#4A148C"] 
+            },
+            {
+                "id": 2,
+                "brand": "Samsung",
+                "name": "Samsung Galaxy S23 Ultra",
+                "full-name": "Samsung Galaxy S23 Ultra Display Dynamic AMOLED 6.8”, Android 13, 12GB RAM, 512GB, S Pen, Batteria 5.000 mAh",
+                "description": "12GB RAM, 512GB, S Pen",
+                "price": "1200 €",
+                "image": "images/s23ultra.jpg",
+                "stock": 10,
+                "colors": ["#ECECEC", "#A98467", "#38424F", "#1A1A1A"] 
+            },
+            {
+                "id": 3,
+                "brand": "Google",
+                "name": "Google Pixel 7 Pro",
+                "full-name": "Google Pixel 7 Pro Display LTPO OLED 6.7”, Android 13, 12GB RAM, 256GB, Batteria 5.000 mAh",
+                "description": "12GB RAM, 256GB, Fotocamera avanzata",
+                "price": "900 €",
+                "image": "images/pixel7pro.jpg",
+                "stock": 12,
+                "colors": ["#E8E8E8", "#5F6368", "#3C4043"] 
+            },
+            {
+                "id": 4,
+                "brand": "Apple",
+                "name": "iPhone 14 Pro Max",
+                "full-name": "Apple iPhone 14 Pro Max Display Super Retina XDR 6.7”, iOS 16, 6GB RAM, 256GB, Batteria 4.323 mAh",
+                "description": "6GB RAM, 256GB, Chip A16 Bionic",
+                "price": "1300 €",
+                "image": "images/iphone14promax.jpg",
+                "stock": 8,
+                "colors": ["#F9E4B7", "#C0C0C0", "#1C1C1E", "#635147"] 
+            },
+            {
+                "id": 5,
+                "brand": "OnePlus",
+                "name": "OnePlus 11 5G",
+                "full-name": "OnePlus 11 5G Display AMOLED 6.7”, Android 13, 16GB RAM, 256GB, Batteria 5.000 mAh",
+                "description": "16GB RAM, 256GB, Ricarica ultra-rapida",
+                "price": "850 €",
+                "image": "images/oneplus11.jpg",
+                "stock": 14,
+                "colors": ["#1B5E20", "#202124", "#A40000"] 
+            },
+            {
+                "id": 6,
+                "brand": "Xiaomi",
+                "name": "Xiaomi 13 Pro",
+                "full-name": "Xiaomi 13 Pro Display AMOLED 6.73”, Android 13, 12GB RAM, 512GB, Batteria 4.820 mAh",
+                "description": "12GB RAM, 512GB, Fotocamera Leica",
+                "price": "950 €",
+                "image": "images/xiaomi13pro.jpg",
+                "stock": 11,
+                "colors": ["#D3D3D3", "#263238", "#3D5AFE"]
+            }
+        ]
+    }
+}
