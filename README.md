@@ -1,5 +1,5 @@
 # TPSI
-repository dedita alla pubblicazione di miei esercizi e progetti scolastici in C
+repository dedita alla pubblicazione di miei esercizi e progetti scolastici in C e in HTML
 
 Sito Socket:
 [Socket](https://grappeggianiccolo.github.io/TPSI/5°F/Bootstrap%20websites/Socket)
